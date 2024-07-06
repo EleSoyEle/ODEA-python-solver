@@ -56,22 +56,24 @@ y0 = y0.reshape(-1)
 
 h = (t1-t0)/n
 
+#Calculamos la solucion numerica
 x,y,t = solve(n,h,dx,dy,x0,y0,t0,res)
 
 size_scat = 10
 print("Iniciando graficacion")
-plt.style.use("dark_background")
+plt.style.use("dark_background") #Fondo negro
 fig = plt.figure(figsize=(6,6))
 ax = fig.add_subplot()
 ax.axis("off")
 def animate(i):
+    #Imprimimos el porcentaje si esta en modo para guardar video
     if i%10==0 and not video_name=="":
         print("{}%".format(100*i/n))
     ax.clear()
     ax.axis("off")
     ax.set_xlim(smin,smax)
     ax.set_ylim(smin,smax)
-    ax.quiver(xv,yv,vdx,vdy,color="steelblue",alpha=0.3)
+    ax.quiver(xv,yv,vdx,vdy,color="steelblue",alpha=0.4)#Mostramos el campo vectorial
     for k in range(res*res):
         ax.plot(x[:i+1,k],y[:i+1,k],c="skyblue",linewidth=0.5,alpha=0.8)
         ax.scatter(x[i,k],y[i,k],c="deepskyblue",s=size_scat)
